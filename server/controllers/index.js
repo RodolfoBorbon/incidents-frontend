@@ -88,7 +88,11 @@ module.exports.processLoginPage = (req, res, next) => {
                 email: user.email
             }, token: authToken});
 
+<<<<<<< HEAD
             //return res.redirect('/survey-list');
+=======
+            //return res.redirect('/book-list');
+>>>>>>> origin/main
         });
     })(req, res, next);
 }
@@ -148,7 +152,11 @@ module.exports.processRegisterPage = (req, res, next) => {
 
             /*
             return passport.authenticate('local')(req, res, () => {
+<<<<<<< HEAD
                 res.redirect('/survey-list')
+=======
+                res.redirect('/book-list')
+>>>>>>> origin/main
             });
             */
         }

@@ -4,16 +4,27 @@
  * Module dependencies.
  */
 
+<<<<<<< HEAD
 var app = require("./server/config/app");
 var debug = require("debug")("week-4:server");
 var http = require("http");
+=======
+var app = require('./server/config/app');
+var debug = require('debug')('week-4:server');
+var http = require('http');
+>>>>>>> origin/main
 
 /**
  * Get port from environment and store in Express.
  */
 
+<<<<<<< HEAD
 var port = normalizePort(process.env.PORT || "3500");
 app.set("port", port);
+=======
+var port = normalizePort(process.env.PORT || '3500');
+app.set('port', port);
+>>>>>>> origin/main
 
 /**
  * Create HTTP server.
@@ -26,8 +37,13 @@ var server = http.createServer(app);
  */
 
 server.listen(port);
+<<<<<<< HEAD
 server.on("error", onError);
 server.on("listening", onListening);
+=======
+server.on('error', onError);
+server.on('listening', onListening);
+>>>>>>> origin/main
 
 /**
  * Normalize a port into a number, string, or false.
@@ -54,6 +70,7 @@ function normalizePort(val) {
  */
 
 function onError(error) {
+<<<<<<< HEAD
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -68,6 +85,24 @@ function onError(error) {
       break;
     case "EADDRINUSE":
       console.error(bind + " is already in use");
+=======
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+>>>>>>> origin/main
       process.exit(1);
       break;
     default:
@@ -81,6 +116,13 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
+<<<<<<< HEAD
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
+=======
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+>>>>>>> origin/main
 }

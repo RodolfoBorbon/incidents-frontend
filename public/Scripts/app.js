@@ -13,7 +13,11 @@
                 if(!confirm("Are you sure?")) 
                 {
                     event.preventDefault();
+<<<<<<< HEAD
                     window.location.assign('/survey-list');
+=======
+                    window.location.assign('/book-list');
+>>>>>>> origin/main
                 }
             });
         }

@@ -1,5 +1,9 @@
 "use strict"
+<<<<<<< HEAD
 class Survey
+=======
+class Book
+>>>>>>> origin/main
 {
     constructor(_id = "", name = "", author ="", description="", price = 0)
     {
@@ -22,21 +26,35 @@ class Survey
 
 class Line
 {
+<<<<<<< HEAD
     constructor(survey = new Survey(), quantity = 1)
     {
         this.survey = survey;
+=======
+    constructor(book = new Book(), quantity = 1)
+    {
+        this.book = book;
+>>>>>>> origin/main
         this.quantity  = quantity;
     }
 
     toString()
     {
+<<<<<<< HEAD
         return "{" + this.survey.toString() + "}, \n" +
+=======
+        return "{" + this.book.toString() + "}, \n" +
+>>>>>>> origin/main
             " quantity: " + this.quantity;
     }
 
     total()
     {
+<<<<<<< HEAD
         return this.survey.feedback * this.quantity;
+=======
+        return this.book.price * this.quantity;
+>>>>>>> origin/main
     }
 }
 
@@ -81,4 +99,8 @@ class Cart
 
 module.exports.Cart = Cart;
 module.exports.Line = Line;
+<<<<<<< HEAD
 module.exports.Survey = Survey;
+=======
+module.exports.Book = Book;
+>>>>>>> origin/main

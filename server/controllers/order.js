@@ -5,7 +5,11 @@ let Order = require('../models/order');
 
 let Store = require('../models/store');
 let Cart = Store.Cart;
+<<<<<<< HEAD
 let Survey = Store.Survey;
+=======
+let Book = Store.Book;
+>>>>>>> origin/main
 
 module.exports.displayOrderList = (req, res, next) => {
     Order.find((err, orderList) => {
@@ -27,6 +31,7 @@ module.exports.processAddPage = (req, res, next) => {
     // Serialize the Line Data
     for(let line of req.body.cart.lines)
     {
+<<<<<<< HEAD
         let survey = new Survey(
           line.survey._id,
           line.survey.name,
@@ -36,6 +41,17 @@ module.exports.processAddPage = (req, res, next) => {
         );
         let quantity = line.quantity;
         cart.lines.push({survey, quantity});
+=======
+        let book = new Book(
+          line.book._id,
+          line.book.name,
+          line.book.author,
+          line.book.description,
+          line.book.price  
+        );
+        let quantity = line.quantity;
+        cart.lines.push({book, quantity});
+>>>>>>> origin/main
     }
     cart.itemCount = req.body.cart.itemCount;
     cart.cartPrice = req.body.cart.cartPrice;
