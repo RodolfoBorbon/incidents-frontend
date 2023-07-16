@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductgSurveyComponent } from './productg-survey.component';
+import { ProductgSurveyComponent } from './product-survey.component';
 
 describe('ProductgSurveyComponent', () => {
   let component: ProductgSurveyComponent;
