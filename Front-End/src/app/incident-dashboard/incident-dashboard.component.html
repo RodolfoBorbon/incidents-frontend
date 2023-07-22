@@ -45,8 +45,7 @@
 
 <!-- Buttons Section -->
 <div class="form-group">
-  <button type="button" class="btn btn-secondary">Cancel</button>
-  <button type="submit" (click)="createIncidentTicket()" class="btn btn-primary">Create ticket</button>
+  <button type="submit" (click)="save()" class="btn btn-primary">Submit</button>
 </div>
 
 <br>
@@ -68,7 +67,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let IncidentItem of incidents">
+      <tr *ngFor="let IncidentItem of IncidentArray">
         <td>{{IncidentItem.incidentDescription}}</td>
         <td>{{IncidentItem.incidentPriority}}</td>
         <td>{{IncidentItem.customerName}}</td>
