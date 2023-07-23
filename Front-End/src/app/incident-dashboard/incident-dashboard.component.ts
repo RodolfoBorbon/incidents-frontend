@@ -25,7 +25,7 @@ constructor(private http: HttpClient)
   this.getAllIncident();
  }
   getAllIncident() {
-    this.http.get("http://localhost:5000/incidents").subscribe((resultData: any)=>
+    this.http.get("http://localhost:4200/incident/getAll").subscribe((resultData: any)=>
     {
       console.log(resultData);
       this.IncidentArray = resultData.data;
@@ -56,7 +56,7 @@ UpdateRecords()
   "incidentNarrative": this.incidentNarrative 
 };
 
-this.http.patch("http://localhost:5000/incidents" + "/" + this.currentIncidentID,bodyData).subscribe((resultData: any) =>
+this.http.patch("http://localhost:4200/incident/update" + "/" + this.currentIncidentID,bodyData).subscribe((resultData: any) =>
 {
   console.log(resultData);
   alert("Incident Updated Successfully!");
@@ -65,7 +65,7 @@ this.http.patch("http://localhost:5000/incidents" + "/" + this.currentIncidentID
 }
 
 setDelete(data: any) {
-  this.http.delete("http://localhost:5000/incidents" + "/" + data._id).subscribe((resultData: any) =>{
+  this.http.delete("http://localhost:4200/incident/delete" + "/" + data._id).subscribe((resultData: any) =>{
     console.log(resultData);
     alert("Incident Deleted Successfully!");
     this.getAllIncident();
@@ -95,7 +95,7 @@ register()
   "incidentNarrative": this.incidentNarrative
   };
 
-  this.http.post("http://localhost:5000/incidents/create",bodyData).subscribe((resultData: any) =>
+  this.http.post("http://localhost:4200/incident/create",bodyData).subscribe((resultData: any) =>
   {
     console.log(resultData);
     alert("Incident Registered Successfully!");
