@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { IncidentDashboardComponent } from './incident-dashboard/incident-dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ClosedIncidentsDashboardComponent } from './closed-incidents-dashboard/closed-incidents-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IncidentDashboardComponent
+    IncidentDashboardComponent,
+    ClosedIncidentsDashboardComponent
   ],
   imports: [
     BrowserModule,

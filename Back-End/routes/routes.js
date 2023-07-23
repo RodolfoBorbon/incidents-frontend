@@ -35,7 +35,7 @@ router.get('/incidents', async(req,res)=>{
 router.get('/incidents/:id', async(req,res)=>{
    
     try{
-         const _id = req.incident._id;
+         const _id = req.params._id;
          const incidents = await incidentModel.findById({_id});
         if(!incidents)
         {
@@ -101,6 +101,39 @@ router.get('/incidents/:id', async(req,res)=>{
  
     }
  });
+
+ // Route to close an incident
+ router.patch("/incidents/close/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const incident = await incidentModel.findByIdAndUpdate(
+      _id,
+      { $set: { status: "Closed" } }, // Assuming you have a 'status' field in your incident model
+      { new: true }
+    );
+    if (!incident) {
+      return res.status(404).send();
+    }
+    res.status(200).send({
+      status: true,
+      message: "Incident closed successfully!",
+      incident: incident
+    });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// View all closed incidents
+router.get('/closed-incidents', async (req, res) => {
+  try {
+    const closedIncidents = await incidentModel.find({ status: "Closed" });
+    res.send(closedIncidents);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 
 module.exports = router;
 

@@ -101,6 +101,7 @@
               <th scope="col">Phone Number</th>
               <th scope="col">Address</th>
               <th scope="col">Incident Narrative</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -127,9 +128,28 @@
                   Delete
                 </button>
               </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="confirmCloseIncident(IncidentItem)"
+                >
+                  Close
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
+        <!-- Button to open the Closed Incidents Dashboard -->
+        <div class="container mt-4">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="openClosedIncidentsDashboard()"
+          >
+            View Closed Incidents
+          </button>
+        </div>
       </div>
     </form>
   </div>

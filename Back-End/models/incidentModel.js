@@ -29,7 +29,12 @@ var incidentSchema = new Schema(
     incidentNarrative: {
         type: String,
         required: true
-    }
-   
-  });
+    },
+    status: {
+        type: String,
+        default: "Open", // Default value is "Open"
+      },
+    },
+    { timestamps: true } // This will add createdAt and updatedAt fields automatically
+  );
 module.exports = mongoose.model('incident',incidentSchema);

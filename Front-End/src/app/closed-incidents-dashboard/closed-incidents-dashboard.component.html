@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h1>Closed Incidents Dashboard</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Incident Description</th>
+        <th scope="col">Incident Priority</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Incident Narrative</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let closedIncident of closedIncidentArray">
+        <td>{{ closedIncident.incidentDescription }}</td>
+        <td>{{ closedIncident.incidentPriority }}</td>
+        <td>{{ closedIncident.customerName }}</td>
+        <td>{{ closedIncident.customerPhoneNumber }}</td>
+        <td>{{ closedIncident.customerAddress }}</td>
+        <td>{{ closedIncident.incidentNarrative }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
