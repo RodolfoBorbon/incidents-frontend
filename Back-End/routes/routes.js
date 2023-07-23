@@ -1,15 +1,106 @@
-var express = require('express');
+const express = require("express")
 const router = express.Router();
+var incidentModel = require('../models/incidentModel');
 
-var incidentController = require('../src/incident/incidentController');
+//Create Records
+router.post('/incident/create', async (req, res) => {
+    try {
+      const incident = new incidentModel(req.body);
+      await incident.validate(); // Validate the input data
+  
+      await incident.save();
+      res.status(201).send({
+        status: true,
+        message: "Incident ticket Created!"
+      });
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  });
 
-router.route('/incident/getAll').get(incidentController.getDataControllerFunction);
+//View all records
+router.get('/incidents', async(req,res)=>{
+   
+   try{
+        const incidents = await incidentModel.find({});
+        res.send(incidents);
+   }
+   catch(error)
+   {
+        res.status(400).send(error);
+   }
+});
 
-router.route('/incident/create').post(incidentController.createIncidentControllerFunction);
+//find records
+router.get('/incidents/:id', async(req,res)=>{
+   
+    try{
+         const _id = req.incident._id;
+         const incidents = await incidentModel.findById({_id});
+        if(!incidents)
+        {
+            return res.status(404).send();
+        }  
+        return res.status(200).send(incidents); 
+    }
+    catch(error)
+    {
+         res.status(400).send(error);
+ 
+    }
+ });
+ 
+//update records
+ router.patch('/incidents/:id', async(req,res)=>{
+   
+    try{
+        const _id = req.params.id;
+        const body = req.body;
+        const updateIncidents = await incidentModel.findByIdAndUpdate(_id,body,{new:true});
+        if(!updateIncidents)
+        {
+            return res.status(404).send();
+        }  
+     
+        res.status(201).send(
+            {
+                "status" : true,
+                "message" : "Incident ticket updated!"
+            });
+ 
+    }
+    catch(error)
+    {
+         res.status(400).send(error);
+ 
+    }
+ 
+ });
 
-router.route('/incident/update/:id').patch(incidentController.updateIncidentController);
-
-router.route('/incident/delete/:id').delete(incidentController.deleteIncidentController);
+//delete records
+ router.delete('/incidents/:id', async(req,res)=>{
+   
+    try{
+            const _id = req.params.id;
+        
+         const deleteIncidents = await incidentModel.findByIdAndDelete(_id);
+        if(!deleteIncidents)
+        {
+            return res.status(404).send();
+        }  
+       
+        res.status(201).send(
+            {
+                "status" : true,
+                "message" : "Incident tiket Deletedd!"
+            });
+    }
+    catch(error)
+    {
+         res.status(400).send(error);
+ 
+    }
+ });
 
 module.exports = router;
 

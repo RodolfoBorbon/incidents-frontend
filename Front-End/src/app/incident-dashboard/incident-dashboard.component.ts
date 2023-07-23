@@ -11,7 +11,6 @@ export class IncidentDashboardComponent
   IncidentArray : any[] = [];
 
   currentIncidentID = "";
-
   incidentDescription: string ="";
   incidentPriority: string ="";
   customerName: string ="";
@@ -25,14 +24,13 @@ constructor(private http: HttpClient)
   this.getAllIncident();
  }
   getAllIncident() {
-    this.http.get("http://localhost:4200/incident/getAll").subscribe((resultData: any)=>
+    this.http.get("http://localhost:4800/incidents").subscribe((resultData: any)=>
     {
       console.log(resultData);
-      this.IncidentArray = resultData.data;
+      this.IncidentArray = resultData;
     });
   }
 
-  
   setUpdate(data: any) 
   {
     this.incidentDescription = data.incidentDescription;
@@ -47,7 +45,7 @@ constructor(private http: HttpClient)
 //funtion being called when the user click the button: createIncidentTicket
 UpdateRecords()
 {
-  var bodyData = {
+  let bodyData = {
   "incidentDescription": this.incidentDescription,
   "incidentPriority": this.incidentPriority,
   "customerName": this.customerName,
@@ -56,7 +54,7 @@ UpdateRecords()
   "incidentNarrative": this.incidentNarrative 
 };
 
-this.http.patch("http://localhost:4200/incident/update" + "/" + this.currentIncidentID,bodyData).subscribe((resultData: any) =>
+this.http.patch("http://localhost:4800/incidents" + "/" + this.currentIncidentID,bodyData).subscribe((resultData: any) =>
 {
   console.log(resultData);
   alert("Incident Updated Successfully!");
@@ -65,7 +63,7 @@ this.http.patch("http://localhost:4200/incident/update" + "/" + this.currentInci
 }
 
 setDelete(data: any) {
-  this.http.delete("http://localhost:4200/incident/delete" + "/" + data._id).subscribe((resultData: any) =>{
+  this.http.delete("http://localhost:4800/incidents" + "/" + data._id).subscribe((resultData: any) =>{
     console.log(resultData);
     alert("Incident Deleted Successfully!");
     this.getAllIncident();
@@ -95,7 +93,7 @@ register()
   "incidentNarrative": this.incidentNarrative
   };
 
-  this.http.post("http://localhost:4200/incident/create",bodyData).subscribe((resultData: any) =>
+  this.http.post("http://localhost:4800/incident/create",bodyData).subscribe((resultData: any) =>
   {
     console.log(resultData);
     alert("Incident Registered Successfully!");
@@ -105,7 +103,8 @@ register()
     this.customerName = '';
     this.customerPhoneNumber = '';
     this.customerAddress = '';
-    this.incidentNarrative = ''
+    this.incidentNarrative = '';
+    this.getAllIncident();
   });
  }
 }
