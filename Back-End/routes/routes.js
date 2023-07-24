@@ -108,7 +108,7 @@ router.get('/incidents/:id', async(req,res)=>{
     const _id = req.params.id;
     const incident = await incidentModel.findByIdAndUpdate(
       _id,
-      { $set: { status: "Closed" } }, // Assuming you have a 'status' field in your incident model
+      { $set: { status: "Closed" } }, 
       { new: true }
     );
     if (!incident) {
