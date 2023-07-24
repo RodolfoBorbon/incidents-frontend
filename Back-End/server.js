@@ -1,7 +1,7 @@
 // Import necessary modules and setup the server
 var express = require('express');
 var server = express();
-var routes = require('./routes/routes');
+var routes = require('./routes/incidents');
 var mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require("body-parser")
