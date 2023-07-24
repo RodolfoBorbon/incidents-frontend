@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const incidentController = require('../controllers/insidents');
+const incidentController = require('../controllers/incidents');
 
 router.post('/incident/create', incidentController.createIncident);
 router.get('/incidents', incidentController.getAllIncidents);
