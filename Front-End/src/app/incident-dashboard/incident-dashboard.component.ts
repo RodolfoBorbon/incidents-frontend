@@ -117,11 +117,6 @@ export class IncidentDashboardComponent {
       });
   }
 }
-
-  // Method to open the Closed Incidents Dashboard
-  openClosedIncidentsDashboard() {
-    this.router.navigate(["/closed-incidents"]);
-  }
 }
 
 
