@@ -1,17 +1,6 @@
 <div class="container">
   <h1>Registration</h1>
-  <form (ngSubmit)="registerUser()" #registrationForm="ngForm">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input
-        type="text"
-        id="name"
-        required
-        [(ngModel)]="newUser.name"
-        name="name"
-        class="form-control"
-      />
-    </div>
+  <form (ngSubmit)="registerUser(registrationForm)" #registrationForm="ngForm">
     <div class="form-group">
       <label for="username">Username:</label>
       <input

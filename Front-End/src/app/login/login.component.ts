@@ -28,22 +28,25 @@ loginUser() {
   this.authService.login(this.user.username, this.user.password)
       .subscribe({
           next: (res: any) => {
-              if (res.status === 200) {
-                  console.log(res.message);
-              } else {
-                  console.error(res.message);
-
-                  // Show a message on login page using MatSnackBar
-                  this.snackBar.open('Invalid username or password, try again', 'Close', {
-                    duration: 5000, // Display duration (in milliseconds)
-                    panelClass: 'error-snackbar' // Optional CSS class for styling the snackbar
-                  });
-              }
+              console.log(res.message);
           },
           error: (err) => {
               console.error(err);
+
+              // Check if err.error is defined and if it has a 'message' property
+              let errorMessage = 'Invalid username or password, try again';
+              if (err.error && err.error.message) {
+                errorMessage = err.error.message;
+              }
+              
+              // Show a message on login page using MatSnackBar
+              this.snackBar.open(errorMessage, '', {
+                duration: 7000, // Display duration (in milliseconds)
+                //panelClass: 'error-snackbar' // Optional CSS class for styling the snackbar
+              });
           }
       });
 }
+
 }
 

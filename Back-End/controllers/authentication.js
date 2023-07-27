@@ -5,13 +5,15 @@ var jwt = require('jsonwebtoken');
 
 //Controller that handles the user registration
 exports.register = function(req, res) {
-    User.register(new User({ username: req.body.username }), req.body.password, function(err, user) {
+    var newUser = new User({ username: req.body.username, email: req.body.email });
+    
+    User.register(newUser, req.body.password, function(err, user) {
         if(err) {
             console.log(err);
-            return res.status(500).json({ mesagge:"An error occurred during registration."});
+            return res.status(500).json({ message:"An error occurred during registration. " + err});
         }
 
-        res.status(200).json({ mesagge: "Registration successful."});
+        res.status(200).json({ message: "Registration successful."});
     });
 };
 
