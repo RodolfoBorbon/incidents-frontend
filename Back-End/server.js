@@ -1,10 +1,14 @@
 // Import necessary modules and setup the server
 var express = require('express');
 var server = express();
-var routes = require('./routes/incidents');
+var incidentRoutes = require('./routes/incidents');
+var authenticationRoutes = require("./routes/authentication");
 var mongoose = require('mongoose');
 const cors = require('cors');
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+var User = require("./models/user");
+var passport = require("passport");
+var LocalStrategy = require("passport-local")
 
 const app = express()
 const port = 4800
@@ -30,6 +34,22 @@ app.listen(port,()=>{
 // Middleware setup
 app.use(cors());
 app.use(bodyParser.json());
-app.use(routes);
+
+// Passport configuration
+app.use(require('express-session')({
+    secret: 'This is a secret sentence',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//Use the routes
+app.use(incidentRoutes);
+app.use(authenticationRoutes);
 
 

@@ -1,3 +1,4 @@
+<!-- app/navbar/navbar.component.html -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <button
@@ -16,7 +17,17 @@
         <a class="nav-link" routerLink="/home">Home</a>
         <a class="nav-link" routerLink="/incidents">Open Incidents</a>
         <a class="nav-link" routerLink="/closed-incidents">Closed Incidents</a>
-        <a class="nav-link" routerLink="/login">Login</a>
+        <a class="nav-link" *ngIf="!currentUser" routerLink="/login">Login</a>
+        <button
+          class="btn btn-link nav-link"
+          *ngIf="currentUser"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+        <span *ngIf="currentUser" class="nav-link"
+          >Welcome... {{ currentUser.username }}</span
+        >
       </div>
     </div>
   </div>

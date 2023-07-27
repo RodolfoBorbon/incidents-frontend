@@ -10,6 +10,12 @@ import { ClosedIncidentsDashboardComponent } from './closed-incidents-dashboard/
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { LogoutComponent } from './logout/logout.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 
 @NgModule({
   declarations: [
@@ -18,13 +24,18 @@ import { NavbarComponent } from './navbar/navbar.component';
     ClosedIncidentsDashboardComponent,
     HomeComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserRegistrationComponent,
+    LogoutComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
