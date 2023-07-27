@@ -14,13 +14,13 @@ function ensureAuthenticated(req, res, next) {
 }
 
 
-router.post('/incident/create', verifyToken, incidentController.createIncident);
-router.get('/incidents', verifyToken, incidentController.getAllIncidents);
-router.get('/incidents/:id', verifyToken, incidentController.getIncidentById);
-router.patch('/incidents/:id', verifyToken, incidentController.updateIncident);
-router.delete('/incidents/:id', verifyToken, incidentController.deleteIncident);
-router.patch('/incidents/close/:id', verifyToken, incidentController.closeIncident);
-router.get('/closed-incidents', verifyToken, incidentController.getClosedIncidents);
+router.post('/incident/create', incidentController.createIncident);
+router.get('/incidents', incidentController.getAllIncidents);
+router.get('/incidents/:id', incidentController.getIncidentById);
+router.patch('/incidents/:id', incidentController.updateIncident);
+router.delete('/incidents/:id', incidentController.deleteIncident);
+router.patch('/incidents/close/:id', incidentController.closeIncident);
+router.get('/closed-incidents', incidentController.getClosedIncidents);
 
 
 module.exports = router;
