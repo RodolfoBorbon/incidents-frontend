@@ -1,3 +1,5 @@
+//Back-End/model/incidentmodel.js
+
 const mongoose = require("mongoose")
 const bcrypt = require( 'bcrypt' );
 const jwt = require("jsonwebtoken")
@@ -5,7 +7,10 @@ var Schema  = mongoose.Schema;
 
 var incidentSchema = new Schema(
     {
-
+        incidentRecordNumber: {    // a. New field
+            type: String,
+            required: true
+        },
     incidentDescription: {
         type: String,
         required: true
@@ -30,11 +35,19 @@ var incidentSchema = new Schema(
         type: String,
         required: true
     },
-    status: {
+    incidentStatus: {  // Incident status field
         type: String,
-        default: "Open", // Default value is "Open"
-      },
+        default: "NEW" // Default value is "NEW"
     },
-    { timestamps: true } // This will add createdAt and updatedAt fields automatically
+    incidentResolution: {  // Incident resolution field
+        type: String,
+        default: "" // Default value is empty string
+    },
+    closedDate: { // Field for the date when the incident was closed
+        type: Date,
+        default: null // Default value is null
+    },
+},
+    { timestamps: true } // This will add created and updated fields automatically
   );
 module.exports = mongoose.model('incident',incidentSchema);

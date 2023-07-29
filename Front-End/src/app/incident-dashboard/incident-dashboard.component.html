@@ -1,10 +1,19 @@
-<!--------------------------- Incident Ticket Form ---------------------------->
-
 <div class="container mt-4">
   <div class="card">
     <h2>Incident Form</h2>
-
     <form (ngSubmit)="save()">
+      <!-- Incident Record Number -->
+      <div class="form-group" *ngIf="currentIncidentID">
+        <label>Incident Record Number</label>
+        <input
+          type="text"
+          [(ngModel)]="incidentRecordNumber"
+          name="incidentRecordNumber"
+          class="form-control"
+          id="incidentRecordNumber"
+          readonly
+        />
+      </div>
       <!-- Incident Description -->
       <div class="form-group">
         <label>Incident Description</label>
@@ -24,6 +33,7 @@
         <select
           class="form-control"
           [(ngModel)]="incidentPriority"
+          readonly
           name="incidentPriority"
           id="incidentPriority"
         >
@@ -78,7 +88,16 @@
           [(ngModel)]="incidentNarrative"
           name="incidentNarrative"
           id="incidentNarrative"
+          rows="1"
+          readonly
+        ></textarea>
+        <textarea
+          class="form-control"
+          [(ngModel)]="userNarrative"
+          name="userNarrative"
+          id="userNarrative"
           rows="3"
+          placeholder="Enter the incident details here"
         ></textarea>
       </div>
 
@@ -86,55 +105,60 @@
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
+      <br />
+      <br />
 
-      <br />
-      <br />
-      <!--------------------------- Incident Ticket Form (put it separate file this dashboard section after********************) ---------------------------->
+      <!------------------------------ Incident Dasboard ------------------------------->
+
       <div class="container mt-4">
         <h1>Incident Dashboard</h1>
         <table class="table">
           <thead>
             <tr>
+              <th scope="col">Record Number</th>
               <th scope="col">Incident Description</th>
               <th scope="col">Incident Priority</th>
               <th scope="col">Name</th>
               <th scope="col">Phone Number</th>
               <th scope="col">Address</th>
               <th scope="col">Incident Narrative</th>
+              <th scope="col">Status</th>
+              <th scope="col">Update Status</th>
               <th scope="col">Actions</th>
+
+              <!-- Added this column for the dropdown -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let IncidentItem of IncidentArray">
+              <td>{{ IncidentItem.incidentRecordNumber }}</td>
               <td>{{ IncidentItem.incidentDescription }}</td>
               <td>{{ IncidentItem.incidentPriority }}</td>
               <td>{{ IncidentItem.customerName }}</td>
               <td>{{ IncidentItem.customerPhoneNumber }}</td>
               <td>{{ IncidentItem.customerAddress }}</td>
               <td>{{ IncidentItem.incidentNarrative }}</td>
+              <td>{{ IncidentItem.incidentStatus }}</td>
+
               <td>
-                <button
-                  type="button"
-                  class="btn btn-success"
-                  (click)="setUpdate(IncidentItem)"
+                <select
+                  [(ngModel)]="IncidentItem.status"
+                  name="status"
+                  (change)="onStatusChange(IncidentItem)"
                 >
-                  Update
-                </button>
+                  <option value="NEW">New</option>
+                  <option value="IN_PROGRESS">In Progress</option>
+                  <option value="DISPATCHED">Dispatched</option>
+                  <option value="CLOSED">Closed</option>
+                </select>
+              </td>
+              <td>
                 <button
                   type="button"
                   class="btn btn-danger"
                   (click)="setDelete(IncidentItem)"
                 >
                   Delete
-                </button>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="confirmCloseIncident(IncidentItem)"
-                >
-                  Close
                 </button>
               </td>
             </tr>

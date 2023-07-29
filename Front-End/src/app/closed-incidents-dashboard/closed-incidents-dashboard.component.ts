@@ -1,5 +1,7 @@
+//app/closed-incidents-dashboard/closed-incidents-dashboard.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { IncidentService } from '../services/incident.service';
 
 @Component({
   selector: 'app-closed-incidents-dashboard',
@@ -9,16 +11,12 @@ import { HttpClient } from '@angular/common/http';
 export class ClosedIncidentsDashboardComponent implements OnInit {
   closedIncidentArray: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private incidentService: IncidentService) {}
 
   ngOnInit() {
-    this.getAllClosedIncidents();
-  }
-
-  getAllClosedIncidents() {
-    this.http.get("http://localhost:4800/closed-incidents").subscribe((resultData: any) => {
-      console.log(resultData);
-      this.closedIncidentArray = resultData;
+    this.incidentService.closedIncidents$.subscribe(closedIncidents => {
+      this.closedIncidentArray = closedIncidents;
     });
+    this.incidentService.fetchClosedIncidents();
   }
 }
