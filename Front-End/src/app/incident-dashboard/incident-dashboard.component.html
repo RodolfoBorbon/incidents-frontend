@@ -1,5 +1,6 @@
+<!-- incident-dashboard.component.html -->
 <div class="container mt-4">
-  <div class="card">
+  <div class="form-group row">
     <h2>Incident Form</h2>
     <form (ngSubmit)="save()">
       <!-- Incident Record Number -->
@@ -30,8 +31,9 @@
       <!-- Incident Priority -->
       <div class="form-group">
         <label>Incident Priority</label>
+        <br />
         <select
-          class="form-control"
+          class="form-control-dropdown"
           [(ngModel)]="incidentPriority"
           readonly
           name="incidentPriority"
@@ -103,68 +105,66 @@
 
       <!-- Buttons Section -->
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-      <br />
-      <br />
-
-      <!------------------------------ Incident Dasboard ------------------------------->
-
-      <div class="container mt-4">
-        <h1>Incident Dashboard</h1>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Record Number</th>
-              <th scope="col">Incident Description</th>
-              <th scope="col">Incident Priority</th>
-              <th scope="col">Name</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Address</th>
-              <th scope="col">Incident Narrative</th>
-              <th scope="col">Status</th>
-              <th scope="col">Update Status</th>
-              <th scope="col">Actions</th>
-
-              <!-- Added this column for the dropdown -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let IncidentItem of IncidentArray">
-              <td>{{ IncidentItem.incidentRecordNumber }}</td>
-              <td>{{ IncidentItem.incidentDescription }}</td>
-              <td>{{ IncidentItem.incidentPriority }}</td>
-              <td>{{ IncidentItem.customerName }}</td>
-              <td>{{ IncidentItem.customerPhoneNumber }}</td>
-              <td>{{ IncidentItem.customerAddress }}</td>
-              <td>{{ IncidentItem.incidentNarrative }}</td>
-              <td>{{ IncidentItem.incidentStatus }}</td>
-
-              <td>
-                <select
-                  [(ngModel)]="IncidentItem.status"
-                  name="status"
-                  (change)="onStatusChange(IncidentItem)"
-                >
-                  <option value="NEW">New</option>
-                  <option value="IN_PROGRESS">In Progress</option>
-                  <option value="DISPATCHED">Dispatched</option>
-                  <option value="CLOSED">Closed</option>
-                </select>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="setDelete(IncidentItem)"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <button type="submit" class="btn btn-1">Submit</button
+        ><button type="reset" class="btn btn-2">Cancel</button>
       </div>
     </form>
   </div>
+</div>
+
+<!------------------------------ Incident Dasboard ------------------------------->
+
+<div class="container3">
+  <h1>Incident Dashboard</h1>
+  <table class="table-active">
+    <thead>
+      <tr>
+        <th scope="col">Record Number</th>
+        <th scope="col">Incident Description</th>
+        <th scope="col">Incident Priority</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Incident Narrative</th>
+        <th scope="col">Status</th>
+        <th scope="col">Update Status</th>
+        <th scope="col">Actions</th>
+
+        <!-- Added this column for the dropdown -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let IncidentItem of IncidentArray">
+        <td>{{ IncidentItem.incidentRecordNumber }}</td>
+        <td>{{ IncidentItem.incidentDescription }}</td>
+        <td>{{ IncidentItem.incidentPriority }}</td>
+        <td>{{ IncidentItem.customerName }}</td>
+        <td>{{ IncidentItem.customerPhoneNumber }}</td>
+        <td>{{ IncidentItem.customerAddress }}</td>
+        <td>{{ IncidentItem.incidentNarrative }}</td>
+        <td>{{ IncidentItem.incidentStatus }}</td>
+
+        <td>
+          <select
+            [(ngModel)]="IncidentItem.incidentStatus"
+            (change)="onStatusChange(IncidentItem)"
+          >
+            <option value="NEW">New</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="DISPATCHED">Dispatched</option>
+            <option value="CLOSED">Closed</option>
+          </select>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-3"
+            (click)="setDelete(IncidentItem)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -10,8 +10,7 @@ export interface Incident {
   customerAddress: string;
   incidentNarrative: string;
   incidentResolution?: string;  // Add this line
-  incidentStatus?: string;
-  status?: string; // If the 'status' property is different from 'incidentStatus'
+  incidentStatus?: string
   closedDate?: Date;
 }
 

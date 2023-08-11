@@ -25,7 +25,7 @@ export class IncidentService {
   updateIncident(id: string, bodyData: any): Observable<any> {
     const url = `http://localhost:4800/incidents/${id}`;
     return this.http.patch(url, bodyData);
-  }
+  }  
 
   deleteIncident(id: string): Observable<any> {
     const url = `http://localhost:4800/incidents/${id}`;

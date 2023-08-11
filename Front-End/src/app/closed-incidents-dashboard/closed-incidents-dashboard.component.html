@@ -19,16 +19,32 @@
     </thead>
     <tbody>
       <tr *ngFor="let closedIncident of closedIncidentArray">
-        <td>{{ closedIncident.incidentRecordNumber }}</td>
-        <td>{{ closedIncident.incidentDescription }}</td>
-        <td>{{ closedIncident.incidentPriority }}</td>
-        <td>{{ closedIncident.customerName }}</td>
-        <td>{{ closedIncident.customerPhoneNumber }}</td>
-        <td>{{ closedIncident.customerAddress }}</td>
-        <td>{{ closedIncident.incidentNarrative }}</td>
-        <td>{{ closedIncident.incidentStatus }}</td>
-        <td>{{ closedIncident.incidentResolution }}</td>
-        <td>{{ closedIncident.closedDate | date : "short" }}</td>
+        <td data-title="Incident Record Number">
+          {{ closedIncident.incidentRecordNumber }}
+        </td>
+        <td data-title="Incident Description">
+          {{ closedIncident.incidentDescription }}
+        </td>
+        <td data-title="Incident Priority">
+          {{ closedIncident.incidentPriority }}
+        </td>
+        <td data-title="Name">{{ closedIncident.customerName }}</td>
+        <td data-title="Phone Number">
+          {{ closedIncident.customerPhoneNumber }}
+        </td>
+        <td data-title="Address">{{ closedIncident.customerAddress }}</td>
+        <td data-title="Incident Narrative">
+          {{ closedIncident.incidentNarrative }}
+        </td>
+        <td data-title="Incident Status">
+          {{ closedIncident.incidentStatus }}
+        </td>
+        <td data-title="Incident Resolution">
+          {{ closedIncident.incidentResolution }}
+        </td>
+        <td data-title="Incident close date">
+          {{ closedIncident.closedDate | date : "short" }}
+        </td>
       </tr>
     </tbody>
   </table>

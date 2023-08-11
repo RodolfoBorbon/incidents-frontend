@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -32,6 +33,7 @@ import { DatePipe } from '@angular/common';
     NavbarComponent,
     UserRegistrationComponent,
     LogoutComponent,
+    FooterComponent,
     
   ],
   imports: [
