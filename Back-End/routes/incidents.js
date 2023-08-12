@@ -12,7 +12,7 @@ router.patch('/incidents/:id', incidentController.updateIncident);  //This route
 router.delete('/incidents/:id', incidentController.deleteIncident); // This route is used to delete a specific incident by its ID.
 router.patch('/incidents/close/:id', incidentController.closeIncident); //This route is used to close a specific incident by its ID.
 router.get('/closed-incidents', incidentController.getClosedIncidents);  //This route is used to get all closed incidents.
-router.patch('/incidents/:id/status', incidentController.updateIncidentStatus);  //This route is used to update the status of a specific incident by its ID
+router.patch('/incidents/:id/status', incidentController.updateIncidentStatus);  //This route is used to update the status of a specific incident by its ID.
 
 
 module.exports = router;

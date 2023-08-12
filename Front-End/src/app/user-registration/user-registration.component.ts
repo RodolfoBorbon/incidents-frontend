@@ -22,7 +22,7 @@ registerUser(form: NgForm) {
     this.http.post('http://localhost:4800/registerUser', this.newUser)
 .subscribe({
     next: (res: any) => {
-        form.resetForm(); //reset the form
+        form.resetForm(); 
         this.snackBar.open('Account created successfully', '', {
             duration: 7000,
         });

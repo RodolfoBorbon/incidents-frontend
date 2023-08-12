@@ -42,7 +42,6 @@ loginUser() {
               // Show a message on login page using MatSnackBar
               this.snackBar.open(errorMessage, '', {
                 duration: 7000, // Display duration (in milliseconds)
-                //panelClass: 'error-snackbar' // Optional CSS class for styling the snackbar
               });
           }
       });

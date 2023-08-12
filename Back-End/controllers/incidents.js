@@ -95,21 +95,14 @@ exports.updateIncident = async (req, res) => {
     };
     let formattedTimestamp = timestamp.toLocaleString('en-US', options);
     
-    // Add userNarrative to the incidentNarrative with timestamp, if it exists
-    if (req.body.userNarrative) {
-        incident.incidentNarrative += `\nUpdated at ${formattedTimestamp}: ${req.body.userNarrative}`; 
-    }
+    // Add userNarrative to the incidentNarrative with timestamp
+    incident.incidentNarrative += `\nUpdated at ${formattedTimestamp}: ${req.body.userNarrative}`; 
 
     // Exclude userNarrative from the update operation
     let { userNarrative, ...updateData } = req.body;
     
     // Update the rest of the incident data
     Object.assign(incident, updateData);
-
-    // Update incidentStatus if it's in the request body
-    if(req.body.incidentStatus) {
-        incident.incidentStatus = req.body.incidentStatus;
-    }
 
     await incident.save();
 
@@ -121,6 +114,7 @@ exports.updateIncident = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
 
 exports.deleteIncident = async (req, res) => {
   try {

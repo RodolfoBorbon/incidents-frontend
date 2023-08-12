@@ -1,5 +1,4 @@
 //app/incident-dasboard/incident-dashboard.component.ts
-
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'; // Import the ToastrService
@@ -26,7 +25,6 @@ export class IncidentDashboardComponent {
   incidentStatus: string = "";
   incidentResolution: string = "";
   userNarrative: string = "";
-
 
   isNarrativeEditable = false;
 
@@ -77,6 +75,7 @@ confirmAndCloseIncident(incident: Incident) {
   }
 }
 
+  // Add the onStatusChange method
    // Add the onStatusChange method
    onStatusChange(incidentItem: Incident) {
     if (incidentItem.incidentStatus === 'IN_PROGRESS' || incidentItem.incidentStatus === 'DISPATCHED') {
@@ -91,6 +90,8 @@ confirmAndCloseIncident(incident: Incident) {
     }
   }
   
+
+
   // Add the fillForm method
   fillForm(incidentItem: Incident) {
     this.currentIncidentID = incidentItem._id ? incidentItem._id : "";
@@ -113,38 +114,31 @@ confirmAndCloseIncident(incident: Incident) {
   }
 
   updateIncidentNarrative() {
-    this.incidentStatus = 'IN_PROGRESS';  // Or any status you want to set before updating the narrative
-
+    this.incidentStatus = 'IN_PROGRESS';
     this.incidentService.updateIncident(this.currentIncidentID, {
-        status: this.incidentStatus,
-        userNarrative: this.userNarrative
+      status: this.incidentStatus,
+      userNarrative: this.userNarrative // use userNarrative here
     }).subscribe((resultData: any) => {
-        console.log(resultData);
-        window.alert(`Incident Narrative updated Successfully!`);
-        
-        // Find the updated incident in the IncidentArray and update its incidentStatus
-        let updatedIncident = this.IncidentArray.find(incident => incident._id === this.currentIncidentID);
-        if (updatedIncident) {
-            updatedIncident.incidentStatus = this.incidentStatus;
-        }
-
-        this.resetForm();
+      console.log(resultData);
+      this.toastr.success(`Incident Narrative updated Successfully!`);
+      this.resetForm();
+      this.incidentService.fetchOpenIncidents();
     });
-}
+  }
 
   setDelete(data: any) {
-    let isConfirmed = window.confirm("Are you sure you want to delete this incident?");
+    const isConfirmed = window.confirm("Are you sure you want to delete this incident?");
+    
     if (isConfirmed) {
-        this.incidentService.deleteIncident(data._id).subscribe((resultData: any) => {
-            console.log(resultData);
-            this.incidentService.fetchOpenIncidents();
-            alert("Incident Deleted Successfully!");
-        });
+      this.incidentService.deleteIncident(data._id).subscribe((resultData: any) => {
+        console.log(resultData);
+        this.toastr.success("Incident Deleted Successfully!");
+        this.incidentService.fetchOpenIncidents();
+      });
     } else {
-        // User clicked 'Cancel', no further action required
+      this.toastr.warning("Incident deletion cancelled.");
     }
-}
-
+  }  
 
   register() {
     let timestamp = new Date();
@@ -171,7 +165,7 @@ confirmAndCloseIncident(incident: Incident) {
       "customerName": this.customerName,
       "customerPhoneNumber": this.customerPhoneNumber,
       "customerAddress": this.customerAddress,
-      "incidentNarrative": this.userNarrative,  // Changed to use userNarrative 
+      "incidentNarrative": this.userNarrative,  
       "incidentStatus": this.incidentStatus
     };
     
@@ -187,7 +181,8 @@ confirmAndCloseIncident(incident: Incident) {
     });
   }
 
-// d. Method to update status of an incident
+
+//Method to update status of an incident
 updateStatus(incident: any, newStatus: string) {
   if (incident.status === 'CLOSED') {
     alert('This incident is already CLOSED and cannot be modified');
@@ -199,38 +194,25 @@ updateStatus(incident: any, newStatus: string) {
 // Method to change status of an incident
 updateIncidentStatus(incident: Incident, event: Event) {
   const newStatus = (event.target as HTMLSelectElement).value;
-  
-  if (newStatus === 'IN_PROGRESS' || newStatus === 'DISPATCHED') {
-    this.fillForm(incident);
-    // prompt for userNarrative
-    let userInput = window.prompt("Please provide a narrative for the status change:");
-    if (userInput) {
-      let timestamp = new Date();
-      let formattedTimestamp = this.formatDate(timestamp);
-      this.userNarrative = `\nUpdated at ${formattedTimestamp}:  ${userInput}`;
-    } else {
-      // If the user cancels or doesn't provide input, return without updating the status
-      return;
-    }
-  } else if (newStatus === 'CLOSED') {
+  if (newStatus === 'CLOSED') {
     this.confirmAndCloseIncident(incident);
-    return;  // Important to return here so the rest of the code doesn't execute for CLOSED status
-  }
-
-  if(incident._id) {
-    this.incidentService.updateIncident(incident._id, {
-      status: newStatus, 
-      userNarrative: this.userNarrative
-    }).subscribe((resultData: any) => {
-      console.log(resultData);
-      window.alert(`Incident status changed to ${newStatus} Successfully!`);
-      this.incidentService.fetchOpenIncidents();
-    });
   } else {
-    window.alert("Incident ID is not available.");
+    if(incident._id) {
+      this.incidentService.updateIncident(incident._id, {
+        status: newStatus, 
+        userNarrative: this.userNarrative
+      }).subscribe((resultData: any) => {
+        console.log(resultData);
+        this.toastr.success(`Incident status changed to ${newStatus} Successfully!`);
+        this.incidentService.fetchOpenIncidents();
+      });
+    } else {
+      this.toastr.error("Incident ID is not available.");
+    }
   }
 }
 }
+
 
 
 

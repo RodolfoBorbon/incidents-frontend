@@ -32,4 +32,5 @@
 .nav-link.active {
     font-weight: bold; 
     font-size: 1.6em; /* Increase size for the active link */
+    color:#b6bbf4;
 }

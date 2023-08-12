@@ -7,7 +7,7 @@ var Schema  = mongoose.Schema;
 
 var incidentSchema = new Schema(
     {
-        incidentRecordNumber: {    // a. New field
+        incidentRecordNumber: {  
             type: String,
             required: true
         },
@@ -35,19 +35,19 @@ var incidentSchema = new Schema(
         type: String,
         required: true
     },
-    incidentStatus: {  // Incident status field
+    incidentStatus: {  
         type: String,
         default: "NEW" // Default value is "NEW"
     },
-    incidentResolution: {  // Incident resolution field
+    incidentResolution: { 
         type: String,
-        default: "" // Default value is empty string
+        default: "" 
     },
-    closedDate: { // Field for the date when the incident was closed
+    closedDate: { 
         type: Date,
-        default: null // Default value is null
+        default: null 
     },
 },
-    { timestamps: true } // This will add created and updated fields automatically
+    { timestamps: true } 
   );
 module.exports = mongoose.model('incident',incidentSchema);
