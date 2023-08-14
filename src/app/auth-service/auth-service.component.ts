@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs'; // new import
+import { environment } from '../../environments/environment'
 
 
 @Injectable({
@@ -16,6 +17,8 @@ import { of } from 'rxjs'; // new import
 export class AuthService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
+
+  private baseApiUrl = environment.apiBaseUrl; // Get the base URL from the environment
 
   constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<any>(localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser') as string) : null);
@@ -27,7 +30,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>('http://localhost:4800/login', { username, password })
+    return this.http.post<any>(`${this.baseApiUrl}/login`, { username, password })
         .pipe(map(user => {
             // login successful if there's a user in the response
             if (user && user.token) {
@@ -56,7 +59,7 @@ export class AuthService {
     
     // include the token in the headers
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    return this.http.get('http://localhost:4800/incidents', { headers });
+    return this.http.get(`${this.baseApiUrl}/incidents`, { headers });
   }
 
   logout() {

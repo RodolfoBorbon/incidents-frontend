@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
+import { environment } from '../../environments/environment'
 
 @Component({
   selector: 'app-user-registration',
@@ -16,10 +17,12 @@ export class UserRegistrationComponent {
     email: ''
 };
 
+private baseApiUrl = environment.apiBaseUrl; // Get the base URL from the environment
+
 constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
 
 registerUser(form: NgForm) {
-    this.http.post('http://localhost:4800/registerUser', this.newUser)
+    this.http.post(`${this.baseApiUrl}/registerUser`, this.newUser)
 .subscribe({
     next: (res: any) => {
         form.resetForm(); 
