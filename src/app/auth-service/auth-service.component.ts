@@ -21,6 +21,7 @@ export class AuthService {
   private baseApiUrl = environment.apiBaseUrl; // Get the base URL from the environment
 
   constructor(private http: HttpClient, private router: Router) {
+    console.log(this.baseApiUrl); // Should print the correct API base URL based on the environment
     this.currentUserSubject = new BehaviorSubject<any>(localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser') as string) : null);
     this.currentUser = this.currentUserSubject.asObservable();
   }

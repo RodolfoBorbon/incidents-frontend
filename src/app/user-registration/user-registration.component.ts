@@ -19,7 +19,9 @@ export class UserRegistrationComponent {
 
 private baseApiUrl = environment.apiBaseUrl; // Get the base URL from the environment
 
-constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
+constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { 
+    console.log(this.baseApiUrl); // Should print the correct API base URL based on the environment
+}
 
 registerUser(form: NgForm) {
     this.http.post(`${this.baseApiUrl}/registerUser`, this.newUser)
