@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class IncidentService {
 
   private baseApiUrl = environment.apiBaseUrl; // Get the base URL from the environment
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { console.log(this.baseApiUrl);} // Should print the correct API base URL based on the environment
 
   fetchOpenIncidents() {
     this.http.get<any>(`${this.baseApiUrl}/incidents`).subscribe(resultData => {
